@@ -1,0 +1,8 @@
+const path = require('path');
+// Exportar o caminho da conexão com o banco de dados, models, seeders e migrations
+module.exports = {
+  config: path.resolve('src', 'db', 'config', 'config.js'),
+  'migrations-path': path.resolve('src', 'db', 'migrations'),
+  'models-path': path.resolve('src', 'db', 'models'),
+  'seeders-path': path.resolve('src', 'db', 'seeders'),
+};

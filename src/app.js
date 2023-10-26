@@ -1,6 +1,7 @@
 const express  = require('express')
 const Router = require('./router')
-
+//Verifica a conexão com o banco de dados
+const database = require('./db/models/')
 
 class app {
     constructor(){
