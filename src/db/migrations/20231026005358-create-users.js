@@ -24,7 +24,7 @@ module.exports = {
       },
       situationId: {
         type: Sequelize.INTEGER,
-        defaultValue: 2,
+        defaultValue: 1,
         references :{model :'Situations', key: 'id'}
       },
       createdAt: {
