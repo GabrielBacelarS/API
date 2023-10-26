@@ -1,3 +1,6 @@
+### AINDA EM DESENVOLVIMENTO
+
+
 COMO RODAR O PROJETO BAIXADO
 
 Instalar todas as dependencias indicada pelo package.json
@@ -35,6 +38,7 @@ Instalar a dependência como desenvolvedor para reiniciar o servidor sempre que 
 
 Abrir o endereço no navegador para acessar a página inicial
 ### http://localhost:8080
+<<<<<<< HEAD
 
 comando sql para criar a base de dados
 ### create database api_database
@@ -73,3 +77,5 @@ Executar as migrations
 
 executar as seeders
 ### npx sequelize-cli db:seed:all
+=======
+>>>>>>> 774ef1a6c1e3fe86cbeb66838555bfcc96f5cb9a
