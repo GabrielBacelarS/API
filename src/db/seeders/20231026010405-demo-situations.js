@@ -5,16 +5,26 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Situations', [
       {
-      nameSituation: "ATIVO",
-      createdAt: new Date(),
-      updatedAt: new Date()
-       },
-       {
-        nameSituation: "INATIVO",
+        nameSituation: 'ATIVO',
         createdAt: new Date(),
-        updatedAt: new Date()
-         }
-  ]);
+        updatedAt: new Date(),
+      },
+      {
+        nameSituation: 'INATIVO',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nameSituation: 'DEBITO',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nameSituation: 'RECUPERAÇÂO',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
   },
 
   async down(queryInterface, Sequelize) {},

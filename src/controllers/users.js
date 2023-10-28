@@ -1,5 +1,4 @@
 // Acessando o banco de dados
-const { Error } = require('sequelize');
 const db = require('../db/models/index');
 
 class UsersController {
@@ -84,17 +83,22 @@ class UsersController {
   }
 
   async update(req, res) {
-    // Criar a rota editar e receber o id enviado da url
-    const { id } = req.params;
     // receber os dados enviados no corpo da requisição
-    const { _id, name, email, situationId } = req.body;
-    return await res.json({
-      id,
-      _id,
-      name,
-      email,
-      situationId,
-    });
+    const data = req.body;
+
+    await db.Users.update(data, { where: { id: data.id } })
+      .then(() => {
+        return res.status(200).json({
+          error: false,
+          message: 'Usuario editado com sucesso',
+        });
+      })
+      .catch((erro) => {
+        return res.status(404).json({
+          error: true,
+          message: 'Não foi possivel editar o Usuario',
+        });
+      });
   }
 
   async destroy(req, res) {

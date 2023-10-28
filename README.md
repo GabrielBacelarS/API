@@ -38,7 +38,6 @@ Instalar a dependência como desenvolvedor para reiniciar o servidor sempre que 
 
 Abrir o endereço no navegador para acessar a página inicial
 ### http://localhost:8080
-<<<<<<< HEAD
 
 comando sql para criar a base de dados
 ### create database api_database
@@ -77,5 +76,9 @@ Executar as migrations
 
 executar as seeders
 ### npx sequelize-cli db:seed:all
-=======
->>>>>>> 774ef1a6c1e3fe86cbeb66838555bfcc96f5cb9a
+
+Criar migration 
+### npx sequelize-cli migration:generate --name=alter-users-image
+
+Executar Down - rollback - Permite que seja  desfeita a migration, permitindo a gestão das alterações no banco de dados, versionamento
+### npx sequelize-cli db:migrate:undo --name

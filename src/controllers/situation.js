@@ -52,22 +52,38 @@ class SituationsController {
         });
       });
   }
+  async update(req, res) {
+    const data = req.body;
+    await db.Situations.update(data, { where: { id: data.id } })
+      .then(() => {
+        res.status(200).json({
+          message: 'Situação editada com sucesso',
+        });
+      })
+      .catch((error) => {
+        res.status(404).json({
+          message: 'Error ao editar o usuario',
+        });
+        console.log(error);
+      });
+  }
   async destroy(req, res) {
     const { id } = req.params;
     await db.Situations.destroy({
       where: { id: id },
-    }).then((delSit) => {
-      res.status(200).json({
+    })
+      .then((delSit) => {
+        res.status(200).json({
           delSit,
           message: 'Situação excluida com sucesso',
-        })
-        .catch((error) => {
-          res.status(404).json({
-            message: `Error ao encontrar a situacao com id ${id}`,
-          });
-          console.log(error);
         });
-    });
+      })
+      .catch((error) => {
+        res.status(404).json({
+          message: `Error ao encontrar a situacao com id ${id}`,
+        });
+        console.log(error);
+      });
   }
 }
 
