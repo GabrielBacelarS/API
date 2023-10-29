@@ -1,6 +1,5 @@
 // Acessando o banco de dados
 const db = require('../db/models/index');
-
 class UsersController {
   async index(req, res) {
     // recuperando o registro do banco de dados
@@ -100,7 +99,21 @@ class UsersController {
         });
       });
   }
-
+  // Rota para fazer a edição da imagem, rota para acessar
+  // http://localhost:8080/users-img
+  async  updateIMG(req, res) {
+    // Recener o id via URL 
+    const { id } = req.params;
+    if( !req.file){ 
+      return res.json({
+        error: true,
+        message: "Arquivo invalido, Arquivos validos: JPEG, PNG"
+      })
+    }
+    res.json({
+      message: 'Imagem alterada com sucesso'
+    })
+  }
   async destroy(req, res) {
     // Criar a rota apagar e receber o id enviado da url
     const { id } = req.params;

@@ -82,3 +82,6 @@ Criar migration
 
 Executar Down - rollback - Permite que seja  desfeita a migration, permitindo a gestão das alterações no banco de dados, versionamento
 ### npx sequelize-cli db:migrate:undo --name
+
+Multer é um middleware node.js para manipulação multipart/form-data, usado para o upload de arquivos.
+### npm install --save multer

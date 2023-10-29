@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const upload = require('./controllers/helpers/uploadIMG')
 const app = new Router();
 const users = require('./controllers/users');
 const Situation = require('./controllers/situation');
@@ -8,6 +9,7 @@ app.get('/', users.index);
 app.get('/users/:id', users.show);
 app.post('/users', users.create);
 app.put('/users/', users.update);
+app.put('/users-img/:id', upload.single('image'),  users.updateIMG)
 app.delete('/users/:id', users.destroy);
 
 // rotas de Situações
