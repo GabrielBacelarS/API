@@ -85,3 +85,9 @@ Executar Down - rollback - Permite que seja  desfeita a migration, permitindo a 
 
 Multer é um middleware node.js para manipulação multipart/form-data, usado para o upload de arquivos.
 ### npm install --save multer
+
+Modulo para criptografar a senha 
+### npm install --save bcryptjs
+
+Instalar a dependencia  JWT 
+### npm install --save jsonwebtoken

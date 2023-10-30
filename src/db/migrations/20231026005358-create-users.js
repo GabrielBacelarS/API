@@ -22,6 +22,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      password:{
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       situationId: {
         type: Sequelize.INTEGER,
         defaultValue: 1,

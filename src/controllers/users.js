@@ -1,22 +1,63 @@
 // Acessando o banco de dados
 const db = require('../db/models/index');
+// Criptografia de senha
+const bcrypt = require('bcryptjs');
 class UsersController {
+  // acesso = http://localhost:8080/users?page=1
   async index(req, res) {
+    // Receber o umero da pagina, quando não é enviado o nnumero da pagina é attribuido a pagina 1
+    const { page = 1 } = req.query;
+
+    //Limite de registro por pagina
+    const limit = 10;
+    //Variavel com o nome da ultima pagina
+    var lastPage = 1;
+    // Contar a quantidade de registros que tem no banco de dados
+    const countUSer = await db.Users.count();
+    // Acessa o IF quando encontrar o registro no banco de dados
+    if (countUSer > 0) {
+      // Calcular a ultima pagina
+      lastPage = Math.ceil(countUSer / limit);
+    } else {
+      res.status(40).json({
+        error: true,
+        message: 'Erro ao Listar os usuarios, Nenhum usuario foi encontrado',
+      });
+    }
+
     // recuperando o registro do banco de dados
     const allUsers = await db.Users.findAll({
       // indicar quais colunas queremos recuperar
       attributes: ['id', 'name', 'email'],
 
       // ordenar os registros pela coluna id em forma descrecente
-      order: [['id', 'DESC']],
+      order: [['id', 'ASC']],
+      // Calcular a partir de qual registro deve retornar e o limite de registros
+      offset: Number(page * limit - limit),
+      limit: limit,
     });
     if (allUsers) {
+      var pagination = {
+        path: '/users',
+        // pagina atual
+        page: page,
+        //url da pagina anterior
+        prev_pag_url: Number(page) - Number(1) >= 1 ? Number(page) - Number(1) : false,
+        //url da proxima pagina
+        next_pag_url:
+          Number(page) + Number(1) > Number(lastPage) ? false : Number(page) + Number(1),
+        // Ultima  pagina
+        lastPage: lastPage,
+        // Quantidade de registros
+        total: countUSer,
+      };
       res.status(200).json({
         allUsers,
+        pagination,
       });
     } else {
       res.status(404).json({
-        message: 'Erro ao Listar os usuarios, Entre em contatp com o suporte',
+        message: 'Erro ao Listar os usuarios, Entre em contato com o suporte',
       });
     }
   }
@@ -55,20 +96,24 @@ class UsersController {
     // Endereço para acessar atraves da aplicação externa : http://localhost:8080/users/
     // receber os dados do body
     const data = req.body;
-    // Salvar no banco de dados
+    //criptografar a senha
+    data.password = await bcrypt.hash(String(data.password), 8);
+    // verifica se o email já foi cadastrado
     const emailUser = req.body.email;
     const VerificarEmailExistent = await db.Users.findOne({
       where: { email: emailUser },
     });
     if (VerificarEmailExistent) {
-      return res.json({
+      return res.status(202).json({
         message: `O email: ${emailUser} já foi cadastrado no banco de dados`,
       });
     } else {
       await db.Users.create(data)
-        .then((dataUser) => {
+        .then((dataUSer) => {
           res.status(201).json({
-            dataUser,
+            Nome: dataUSer.name,
+            Email: dataUSer.email,
+            Situação: dataUSer.situationId,
             message: 'Usuario cadastrado com sucesso',
           });
         })
@@ -99,21 +144,7 @@ class UsersController {
         });
       });
   }
-  // Rota para fazer a edição da imagem, rota para acessar
-  // http://localhost:8080/users-img
-  async  updateIMG(req, res) {
-    // Recener o id via URL 
-    const { id } = req.params;
-    if( !req.file){ 
-      return res.json({
-        error: true,
-        message: "Arquivo invalido, Arquivos validos: JPEG, PNG"
-      })
-    }
-    res.json({
-      message: 'Imagem alterada com sucesso'
-    })
-  }
+
   async destroy(req, res) {
     // Criar a rota apagar e receber o id enviado da url
     const { id } = req.params;

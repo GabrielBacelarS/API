@@ -7,7 +7,7 @@ module.exports = {
        return Promise.all([
         queryInterface.addColumn('Users', 'image', {
           type: Sequelize.DataTypes.STRING,
-          after: "email"
+          AFTER: "email",
         },{transaction: p})
       ]);
     });
