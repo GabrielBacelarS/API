@@ -1,5 +1,19 @@
-### AINDA EM DESENVOLVIMENTO
+FINALIZADO
+Tecnologias Utilizadas:
 
+Node.js: Plataforma de execução de JavaScript.
+
+Express: Framework para criação de aplicativos da web em Node.js.
+
+Sequelize: ORM (Object-Relational Mapping) para interagir com o banco de dados.
+
+PostgreSQL: Sistema de gerenciamento de banco de dados relacional.
+
+Multer: Middleware para manipulação de uploads de arquivos.
+
+Bcrypt: Biblioteca para criptografia de senhas.
+
+JSON Web Tokens (JWT): Utilizado para autenticação e autorização
 
 COMO RODAR O PROJETO BAIXADO
 
